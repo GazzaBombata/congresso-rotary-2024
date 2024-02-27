@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="h-full bg-white">>
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body class="h-full">
   <div class="bg-white">
 
   {{ $slot }}

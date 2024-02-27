@@ -1,4 +1,3 @@
-
 <x-layout>
   <x-header 
       :items="[
@@ -10,6 +9,7 @@
       ]"
     />
 
+  <main>
   <x-hero 
     mdOnlyPrompt="Leggi l'annuncio del governatore." 
     title="Congresso Rotary 2024, Brescia" 
@@ -18,4 +18,5 @@
     :primaryCta="['name' => 'Registrati', 'url' => '#']" 
     :secondaryCta="['name' => 'Consulta il programma', 'url' => '#']" 
   />
+  </main>
 </x-layout>

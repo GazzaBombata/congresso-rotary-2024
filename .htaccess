@@ -1,6 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteCond %{HTTP_HOST} ^giorgiog26.sg-host.com$ [NC,OR] RewriteCond %{HTTP_HOST} ^www.giorgiog26.sg-host.com$
+    RewriteCond %{HTTP_HOST} ^giorgiog26.sg-host.com$ [NC,OR] 
+    RewriteCond %{HTTP_HOST} ^www.giorgiog26.sg-host.com$
     RewriteCond %{REQUEST_URI} !public/
     RewriteRule (.*) /public/$1 [L]
 
