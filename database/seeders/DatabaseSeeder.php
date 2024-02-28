@@ -12,11 +12,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $users = \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'email' => 'test@example.com',
+        ]);
+
+        foreach ($users as $user) {
+            $events = \App\Models\Event::factory(1)->create(['created_by' => $user->id]);
+
+            foreach ($events as $event) {
+                \App\Models\Registration::factory(1)->create([
+                    'user_id' => $user->id,
+                    'event_id' => $event->id,
+                ]);
+            }
+        }
     }
 }
+

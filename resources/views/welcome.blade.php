@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -20,7 +20,7 @@
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
-                        <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
+                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
@@ -130,4 +130,28 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}
+
+<x-layout>
+  <x-header 
+      :items="[
+        ['name' => 'Registrazione', 'url' => '#'],
+        ['name' => 'Programma', 'url' => '#'],
+        ['name' => 'News', 'url' => '#'],
+        ['name' => 'Alloggio', 'url' => '#'],
+        ['name' => 'Parcheggi', 'url' => '#']
+      ]"
+    />
+
+  <main>
+  <x-hero 
+    mdOnlyPrompt="Leggi l'annuncio del governatore." 
+    title="Congresso Rotary 2024, Brescia" 
+    description="Nelle seguenti date: 21/22/23 giugno 2024 si terrà il Congresso Rotary.<br/>Consulta il programma di seguito e registrati." 
+    :mdOnlyCta="['name' => 'Leggi di più', 'url' => '#']" 
+    :primaryCta="['name' => 'Registrati', 'url' => '#']" 
+    :secondaryCta="['name' => 'Consulta il programma', 'url' => '#']" 
+  />
+  </main>
+</x-layout>
+
