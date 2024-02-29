@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'email',
         'password',
     ];
@@ -50,6 +51,6 @@ class User extends Authenticatable
 
     public function createdEvents()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'created_by');
     }
 }
