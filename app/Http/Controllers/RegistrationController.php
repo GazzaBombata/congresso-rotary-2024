@@ -14,6 +14,14 @@ class RegistrationController extends Controller
         //
     }
 
+    public function currentUserRegistrations()
+    {   
+        $user = auth()->user();
+        $registrations = $user->registrations;
+        $registrationsWithEvent = $registrations->load('event');
+        return view('dashboard-personal', ['registrations' => $registrationsWithEvent]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

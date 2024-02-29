@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\User;
 
 class EventController extends Controller
 {
@@ -15,6 +16,7 @@ class EventController extends Controller
         $events = Event::all();
         return view('dashboard-events', ['events' => $events]);
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -23,9 +23,7 @@ Route::get('/dashboard', function () {
     return redirect()->route('dashboard.personal');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard/personal', function () {
-    return view('dashboard-personal');
-})
+Route::get('/dashboard/personal', [App\Http\Controllers\RegistrationController::class, 'currentUserRegistrations'])
     ->middleware(['auth', 'verified'])->name('dashboard.personal');
 
 Route::get('/dashboard/events', [App\Http\Controllers\EventController::class, 'index'])
@@ -33,9 +31,7 @@ Route::get('/dashboard/events', [App\Http\Controllers\EventController::class, 'i
 
 Route::get(
     '/dashboard/participants',
-    function () {
-        return view('dashboard-participants');
-    }
+    [App\Http\Controllers\UserController::class, 'index']
 )
     ->middleware(['auth', 'verified'])->name('dashboard.participants');
 
