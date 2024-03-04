@@ -11,10 +11,16 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function dashboardIndex()
     {
         $events = Event::all();
         return view('dashboard-events', ['events' => $events]);
+    }
+
+    public function index()
+    {
+        $events = Event::all();
+        return view('events', ['events' => $events]);
     }
 
 

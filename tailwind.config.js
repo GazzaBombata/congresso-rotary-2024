@@ -17,5 +17,15 @@ export default {
         // },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        // function({ addUtilities }) {
+        //     const newUtilities = {
+        //         '.x-cloak': {
+        //             display: 'none',
+        //         },
+        //     }
+        //     addUtilities(newUtilities);
+        // }
+    ],
 };
