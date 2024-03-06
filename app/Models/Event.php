@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'created_by', 'description', 'start_date', 'end_date', 'location'];
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -17,4 +19,6 @@ class Event extends Model
     {
         return $this->hasMany(Registration::class);
     }
+
+    
 }

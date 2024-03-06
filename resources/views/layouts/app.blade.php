@@ -5,12 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        {{-- <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
-
+        <title>{{ config('app.name', 'Congresso Rotary') }}</title>
+        <link rel="icon" type="image/png" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cleanpng.com%2Fpng-rotary-international-rotary-club-of-toronto-clip-a-6307279%2F&psig=AOvVaw2DRXVY5OTbyYQXXJWGMN0S&ust=1709801997033000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOiPhfii34QDFQAAAAAdAAAAABAS" alt="Rotary Logo">
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

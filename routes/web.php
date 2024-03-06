@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Event;
+use App\Models\User;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,20 +23,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])
+Route::get('/events', [EventController::class, 'index'])
     ->name('events');
 
 Route::get('/dashboard', function () {
     return redirect()->route('dashboard.personal');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard/personal', [App\Http\Controllers\RegistrationController::class, 'currentUserRegistrations'])
+Route::get('/dashboard/personal', [RegistrationController::class, 'currentUserRegistrations'])
     ->middleware(['auth', 'verified'])->name('dashboard.personal');
 
-Route::get('/dashboard/events', [App\Http\Controllers\EventController::class, 'dashboardIndex'])
+Route::get('/dashboard/events', [EventController::class, 'dashboardIndex'])
     ->middleware(['auth', 'verified'])->name('dashboard.events');
 
-Route::get('/dashboard/participants', [App\Http\Controllers\UserController::class, 'index'])
+Route::get('/dashboard/participants', [UserController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('dashboard.participants');
 
 Route::middleware('auth')->group(function () {
@@ -40,5 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('/events', [EventController::class, 'create'])
+    ->name('events.create');
 
 require __DIR__ . '/auth.php';

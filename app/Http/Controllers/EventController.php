@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\User;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -27,9 +28,42 @@ class EventController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // validation
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'location' => 'required',
+        ], [
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.max' => 'Il campo nome non può superare i 255 caratteri.',
+            'description.required' => 'Il campo descrizione è obbligatorio.',
+            'start_date.required' => 'Il campo data di inizio è obbligatorio.',
+            'start_date.date' => 'Il campo data di inizio deve essere una data valida.',
+            'end_date.required' => 'Il campo data di fine è obbligatorio.',
+            'end_date.date' => 'Il campo data di fine deve essere una data valida.',
+            'end_date.after_or_equal' => 'La data di fine deve essere successiva o uguale alla data di inizio.',
+            'location.required' => 'Il campo luogo è obbligatorio.',
+        ]);
+
+        $event = Event::create([
+            'name' => $request->name,
+            'created_by' => $request->user()->id,
+            'description' => $request->description,
+            'start_date' => Carbon::parse($request->start_date)->format('Y-m-d H:i:s'),
+            'end_date' => Carbon::parse($request->end_date)->format('Y-m-d H:i:s'),
+            'location' => $request->location
+        ]);
+
+        if ($event) {
+            return redirect()->route('dashboard.events')->with('success', 'Evento creato con successo');
+        } else {
+            return redirect()->route('dashboard.events')->with('error', 'Si è verificato un errore durante la creazione dell\'evento');
+        }
+
     }
 
     /**
