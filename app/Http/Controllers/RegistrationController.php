@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class RegistrationController extends Controller
 {
@@ -25,9 +26,33 @@ class RegistrationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+//         request: 
+// Symfony\Component\HttpFoundation
+// \
+// InputBag {#40 ▼
+//     #parameters: array:2 [▼
+//       "_token" => "1ZKugVFnaTOUsSEQNOioU9wWruGoP6WZ2raGjyuF"
+//       "event_id" => "1"
+//     ]
+//   }
+
+        $request->validate([
+            'event_id' => 'required|exists:events,id'
+        ]);
+
+        $event = Event::find($request->event_id);
+        if ($event->registrations->contains('user_id', $request->user()->id)) {
+            return redirect()->route('dashboard.personal');
+        }
+        $user = $request->user();
+        $user->registrations()->create([
+            'event_id' => $event->id,
+            'registered_at' => now()
+        ]);
+
+        return redirect()->route('dashboard.personal');
     }
 
     /**

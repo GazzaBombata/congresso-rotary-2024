@@ -1,4 +1,4 @@
-<div x-data="{ modalOpen: false, dangerModalOpen: false }">
+<div x-data="{ modalOpen: false, dangerModalOpen: false, currentEvent: null }">
 
   @auth
   <x-app-layout>
@@ -8,7 +8,7 @@
         <div class="flex items-center justify-between">
           <h3 class="text-lg">{{$value->name}}</h2>
             {{-- @if($condition) --}}
-            <x-secondary-button @click="modalOpen = true">
+            <x-secondary-button @click="modalOpen = true, currentEvent = {{$value}}">
               <span class="hidden sm:block">Registrati</span>
               <x-icons.right-arrow />
             </x-secondary-button>
@@ -59,22 +59,26 @@
   @endguest
 
   <x-popup-standard :title="'titolo'" :paragraph="'Questo è il corpo del modale.'" x-bind:modal-open="modalOpen">
-    <x-secondary-button @click="modalOpen = false">
-      <span class="hidden sm:block">Annulla</span>
+    <x-secondary-button @click="modalOpen = false, console.log(currentEvent.id)">
+      <span class="sm:block">Annulla</span>
       <x-icons.bin />
     </x-secondary-button>
-    <x-primary-button>
-      <span class="hidden sm:block">Conferma</span>
+    <form method="POST" action="/registrations">
+    @csrf
+    <input type="hidden" name="event_id" :value="currentEvent ? currentEvent.id : '#' ">
+    <x-primary-button type="submit">
+      <span class="block">Conferma</span>
     </x-primary-button>
+    </form>
   </x-popup-standard>
 
   <x-popup-danger :paragraph="'Questo è il corpo del modale.'" x-bind:danger-modal-open="dangerModalOpen">
     <x-secondary-button @click="dangerModalOpen = false">
-      <span class="hidden sm:block">Annulla</span>
+      <span class="sm:block">Annulla</span>
       <x-icons.bin />
     </x-secondary-button>
     <x-primary-button>
-      <span class="hidden sm:block">Conferma</span>
+      <span class="sm:block">Conferma</span>
     </x-primary-button>
   </x-popup-danger>
   

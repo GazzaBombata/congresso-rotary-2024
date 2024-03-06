@@ -46,6 +46,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/events', [EventController::class, 'create'])
-    ->name('events.create');
+->middleware(['auth', 'verified']) ->name('events.create');
+
+Route::put('/events/{event}', [EventController::class, 'update'])
+->middleware(['auth', 'verified']) ->name('events.update');
+
+Route::delete('/events/{event}', [EventController::class, 'destroy'])
+->middleware(['auth', 'verified']) ->name('events.destroy');
+
+Route::post('/registrations', [RegistrationController::class, 'create'])
+->middleware(['auth', 'verified']) ->name('registrations.create');
 
 require __DIR__ . '/auth.php';
