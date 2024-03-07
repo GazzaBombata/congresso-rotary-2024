@@ -1,6 +1,6 @@
-# Project Name
+# Congresso Rotary 06/2024
 
-This is a Laravel project that implements a role-based authentication system.
+This is a Laravel project that implements a role-based authentication system. It is a sohowcase project built for Rotary association, in order to manage the registration system of their national event that will take place in Brescia on June 2023.
 
 ## Features
 
