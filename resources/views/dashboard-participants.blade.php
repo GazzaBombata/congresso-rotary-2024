@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-layout>
   <x-slot name="header">
     <x-header-dashboard />
   </x-slot>
@@ -31,4 +31,4 @@
 
 
 
-</x-app-layout>
+</x-layout>

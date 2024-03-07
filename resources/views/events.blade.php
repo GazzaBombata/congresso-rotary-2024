@@ -1,9 +1,9 @@
+  <x-layout>
 <div x-data="{ modalOpen: false, dangerModalOpen: false, currentEvent: null, currentRegistration : null, openDangerModal: openDangerModal, redirectOpen : false }">
 
   <x-alert-checks />
 
   @auth
-  <x-app-layout>
     <div class="space-y-4">
       @foreach($events as $event)
       <x-dashboard-item>
@@ -29,11 +29,9 @@
       </x-dashboard-item>
       @endforeach
     </div>
-  </x-app-layout>
   @endauth
 
   @guest
-  <x-layout>
     <x-header :items="[
     ['name' => 'Lista Eventi', 'url' => '/events'],
   ]" />
@@ -52,7 +50,6 @@
         @endforeach
       </div>
     </main>
-  </x-layout>
   @endguest
 
   <x-popup-standard :title="'Conferma la registrazione'">
@@ -126,3 +123,5 @@
   }
 
 </script>
+</x-layout>
+```

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-layout>
   <x-slot name="header">
     <x-header-dashboard />
   </x-slot>
@@ -13,7 +13,7 @@
 
   @auth
   @if(Auth::user()->role == 'admin')
-  {{-- create form div --}}
+
   <x-dashboard-item>
     <div x-data="{ formOpen: false }">
       <x-primary-button x-show="!formOpen" @click="formOpen = true">
@@ -38,7 +38,7 @@
     </div>
   </x-dashboard-item>
 
-  {{-- events list --}}
+
   <div class="space-y-4 my-4">
     @foreach($events as $event => $value)
     <x-dashboard-item>
@@ -56,7 +56,7 @@
             </x-danger-button>
           </div>
         </div>
-        {{-- update form for each event --}}
+
         <form x-ref="updateForm" x-show="updateFormOpen" class="max-w-md mx-auto space-y-4 my-4" method="POST" action="/events/{{$value->id}}">
           @csrf
           @method('PUT')
@@ -75,7 +75,7 @@
             Aggiorna</button>
           <x-secondary-button @click="updateFormOpen = false">Annulla</x-secondary-button>
         </form>
-        {{-- delete form for each event --}}
+
         <form x-ref="deleteForm" x-show="deleteFormOpen" class="max-w-md mx-auto space-y-4 my-4" method="POST" action="/events/{{$value->id}}">
           @csrf
           @method('DELETE')
@@ -90,6 +90,7 @@
       </div>
     </x-dashboard-item>
     @endforeach
+  </div>
     @endif
     @endauth
 
@@ -100,4 +101,4 @@
     @endauth
 
 
-</x-app-layout>
+</x-layout>
