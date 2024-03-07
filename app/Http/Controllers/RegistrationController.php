@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\User;
+use App\Models\Registration;
 
 class RegistrationController extends Controller
 {
@@ -16,7 +18,7 @@ class RegistrationController extends Controller
     }
 
     public function currentUserRegistrations()
-    {   
+    {
         $user = auth()->user();
         $registrations = $user->registrations;
         $registrationsWithEvent = $registrations->load('event');
@@ -28,7 +30,7 @@ class RegistrationController extends Controller
      */
     public function create(Request $request)
     {
-//         request: 
+        //         request: 
 // Symfony\Component\HttpFoundation
 // \
 // InputBag {#40 ▼
@@ -90,8 +92,12 @@ class RegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $registration = Registration::find($id);
+        if ($registration->user_id == $request->user()->id) {
+            $registration->delete();
+        }
+        return redirect()->route('dashboard.personal')->with('success', 'Registration deleted successfully!');
     }
 }

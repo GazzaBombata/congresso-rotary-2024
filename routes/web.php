@@ -57,4 +57,10 @@ Route::delete('/events/{event}', [EventController::class, 'destroy'])
 Route::post('/registrations', [RegistrationController::class, 'create'])
 ->middleware(['auth', 'verified']) ->name('registrations.create');
 
+Route::delete('/registrations/{registration}', [RegistrationController::class,'destroy'])
+->middleware(['auth', 'verified']) ->name('registrations.destroy');
+
+Route::post('/makeadmin', [UserController::class,'makeAdmin'])
+->middleware(['auth', 'verified']) ->name('makeadmin');
+
 require __DIR__ . '/auth.php';

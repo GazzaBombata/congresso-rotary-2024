@@ -16,6 +16,11 @@
             {{ __('Dashboard') }}
           </x-nav-link>
         </div>
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+          <x-nav-link :href="route('events')" :active="request()->routeIs('events')">
+            {{ __('Lista Eventi') }}
+          </x-nav-link>
+        </div>
       </div>
 
       <!-- Settings Dropdown -->
@@ -66,15 +71,21 @@
   <!-- Responsive Navigation Menu -->
   <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('dashboard.personal')" :active="request()->routeIs('dashboard')">
+      <x-responsive-nav-link :href="route('dashboard.personal')" :active="request()->routeIs('dashboard/personal')">
         {{ __('Le tue registrazioni') }}
       </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('dashboard.events')" :active="request()->routeIs('dashboard')">
+      <x-responsive-nav-link :href="route('events')" :active="request()->routeIs('events')">
         {{ __('Eventi') }}
       </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('dashboard.participants')" :active="request()->routeIs('dashboard')">
-        {{ __('Partecipanti') }}
+      @if(Auth::user()->role == 'admin')
+      <x-responsive-nav-link :href="route('dashboard.events')" :active="request()->routeIs('dashboard(events)')">
+        {{ __('Impostazioni Eventi') }}
       </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('dashboard.participants')" :active="request()->routeIs('dashboard/participants')">
+        {{ __('Elenco Partecipanti') }}
+      </x-responsive-nav-link>
+      @endif
+
     </div>
 
     <!-- Responsive Settings Options -->

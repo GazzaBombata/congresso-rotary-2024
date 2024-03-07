@@ -15,5 +15,17 @@ class UserController extends Controller
         $users = User::all();
         return view('dashboard-participants', ['users' => $users]);
     }
+
+    public function makeAdmin(Request $request)
+    {   
+
+        $user = User::find($request->user_id);
+        if (!$user) {
+            return redirect()->route('dashboard.participants')->with('error','Utente non trovato');
+        }
+        $user->role = 'admin';
+        $user->save();
+        return redirect()->route('dashboard.participants')->with('success','Utente promosso a amministratore');
+    }
   
 }

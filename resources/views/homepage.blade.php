@@ -1,11 +1,7 @@
 <x-layout>
   <x-header 
       :items="[
-        ['name' => 'Registrazione', 'url' => '#'],
-        ['name' => 'Programma', 'url' => '#'],
-        ['name' => 'News', 'url' => '#'],
-        ['name' => 'Alloggio', 'url' => '#'],
-        ['name' => 'Parcheggi', 'url' => '#']
+        ['name' => 'Lista Eventi', 'url' => '/events'],
       ]"
     />
 

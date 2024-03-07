@@ -1,7 +1,7 @@
-@props(['title', 'paragraph', 'modalOpen'])
+@props(['title'])
 
 <div >
-    <div x-show="modalOpen" x-cloak @click.away="modalOpen = false" tabindex="-1" aria-hidden="true" class="bg-gray-500 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div x-show="modalOpen" @open-modal.window="modalOpen = true" @close-modal.window="modalOpen = false" x-cloak @click.away="modalOpen = false" tabindex="-1" aria-hidden="true" class="bg-gray-500 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow">
@@ -17,18 +17,9 @@
             <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <!-- Modal body -->
-        <div class="p-4 md:p-5 space-y-4">
-            {{-- <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                    </p> --}}
-            {{ $paragraph }}
-        </div>
-        <!-- Modal footer -->
-        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            {{-- Insert buttons as slot --}}
-            {{ $slot }}
-        </div>
+        
+        {{ $slot }}
+
     </div>
     </div>
 </div>

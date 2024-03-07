@@ -3,6 +3,8 @@
     <x-header-dashboard />
   </x-slot>
 
+    <x-alert-checks />
+    
   @auth
   <x-dashboard-item>
     Hai già effettuato l'accesso con l'email {{auth() -> user() -> email}}
